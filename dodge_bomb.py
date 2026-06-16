@@ -112,7 +112,7 @@ def main():
     clock = pg.time.Clock()
     tmr = 0
     kk_imgs = get_kk_imgs()
-    # bb = init_bb_imgs()
+    # bb = init_bb_imgs(bb_img)
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
