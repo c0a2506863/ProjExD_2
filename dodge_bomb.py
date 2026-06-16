@@ -31,8 +31,8 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
 def gameover(screen: pg.Surface) -> None:
     """
     こうかとんに爆弾が着弾した際に、ゲームオーバー画面を表示する
-    引数：作ったSurface
-    戻り値：
+    引数：screen
+    戻り値：None
     """
     go_img = pg.Surface((WIDTH, HEIGHT))
     pg.draw.rect(go_img, (0, 0, 0), pg.Rect(0, 0, WIDTH, HEIGHT))
@@ -42,7 +42,7 @@ def gameover(screen: pg.Surface) -> None:
     gokk_img = pg.image.load("fig/8.png")
     screen.blit(go_img, [0, 0]) 
     screen.blit(txt, [400, 300])
-    screen.blit(gokk_img, [300, 300])
+    screen.blit(gokk_img, [325, 300])
     screen.blit(gokk_img, [750, 300])
     pg.display.update()
     time.sleep(5)
