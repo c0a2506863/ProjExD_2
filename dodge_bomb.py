@@ -41,7 +41,7 @@ def gameover(screen: pg.Surface) -> None:
     txt = go_fonto.render("Game Over", True, (255, 255, 255))
     gokk_img = pg.image.load("fig/8.png")
     screen.blit(go_img, [0, 0]) 
-    screen.blit(txt, [400, 300])
+    screen.blit(txt, [WIDTH-700, HEIGHT-350])
     screen.blit(gokk_img, [325, 300])
     screen.blit(gokk_img, [750, 300])
     pg.display.update()
@@ -80,6 +80,18 @@ def countup(time: int, screen: pg.Surface) -> None:
     screen.blit(txt, [0, 0])
 
 
+def init_bb_imgs(bb_img: pg.Surface) -> tuple[list[pg.Surface], list[int]]:
+    """
+    """
+    bb_imgs = []
+    for r in range(1, 11):
+        bb_img = pg.Surface((20*r, 20*r))
+        pg.draw.circle(bb_img, (255, 0, 0), (10*r, 10*r), 10*r)
+        bb_imgs.append(bb_img)
+    bb_accs = [a for a in range(1, 11)]
+    return bb_imgs, bb_accs
+
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -100,6 +112,7 @@ def main():
     clock = pg.time.Clock()
     tmr = 0
     kk_imgs = get_kk_imgs()
+    # bb = init_bb_imgs()
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
