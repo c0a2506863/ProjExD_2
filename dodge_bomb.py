@@ -48,6 +48,21 @@ def gameover(screen: pg.Surface) -> None:
     time.sleep(5)
 
 
+def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
+    kk_dict = {
+        ( 0, 0): pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 1.0),  # キー押下がない場合
+        (+5, 0): pg.transform.rotozoom(pg.image.load("fig/3.png"), 180, 1.0),  # 右
+        (+5,-5): pg.transform.rotozoom(pg.image.load("fig/3.png"), -135, 1.0),  # 右上
+        ( 0,-5): pg.transform.rotozoom(pg.image.load("fig/3.png"), -90, 1.0),  # 上
+        (-5,-5): pg.transform.rotozoom(pg.image.load("fig/3.png"), -45, 1.0),  # 左上
+        (-5, 0): pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 1.0),  # 左
+        (-5,+5): pg.transform.rotozoom(pg.image.load("fig/3.png"), 45, 1.0),  # 左下
+        ( 0,+5): pg.transform.rotozoom(pg.image.load("fig/3.png"), 90, 1.0),  # 下
+        (+5,+5): pg.transform.rotozoom(pg.image.load("fig/3.png"), 135, 1.0),  # 右下
+    }
+    return kk_dict
+
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -67,6 +82,7 @@ def main():
 
     clock = pg.time.Clock()
     tmr = 0
+    kk_imgs = get_kk_imgs()
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -93,6 +109,7 @@ def main():
         kk_rct.move_ip(sum_mv)
         if check_bound(kk_rct) != (True, True):
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])  #動きをなかったことにする
+        kk_img = kk_imgs[tuple(sum_mv)]
         screen.blit(kk_img, kk_rct)
 
         bb_rct.move_ip(vx, vy)
