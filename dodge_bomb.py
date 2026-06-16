@@ -49,6 +49,11 @@ def gameover(screen: pg.Surface) -> None:
 
 
 def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
+    """
+    飛ぶ方向に従ってこうかとん画像を切り替える
+    引数：None
+    戻り値：辞書[移動した方向を示したタプル, 押したキーの方向に向いて飛んでる画像]
+    """
     kk_dict = {
         ( 0, 0): pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 1.0),  # キー押下がない場合
         (+5, 0): pg.transform.rotozoom(pg.image.load("fig/3.png"), 180, 1.0),  # 右
