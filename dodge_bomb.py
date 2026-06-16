@@ -31,7 +31,7 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
 def gameover(screen: pg.Surface) -> None:
     """
     こうかとんに爆弾が着弾した際に、ゲームオーバー画面を表示する
-    引数：screen
+    引数：screenのSurface
     戻り値：None
     """
     go_img = pg.Surface((WIDTH, HEIGHT))
@@ -66,6 +66,18 @@ def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
         (+5,+5): pg.transform.rotozoom(pg.image.load("fig/3.png"), 135, 1.0),  # 右下
     }
     return kk_dict
+
+
+def countup(time: int, screen: pg.Surface) -> None:
+    """
+    経過時間を表示する
+    引数：経過時間を計算するための関数, screenのSurface
+    戻り値：経過時間
+    """
+    time = time / 50
+    tmr_fonto = pg.font.Font(None, 80)
+    txt = tmr_fonto.render(str(time), True, (0, 0, 0))
+    screen.blit(txt, [0, 0])
 
 
 def main():
@@ -124,6 +136,7 @@ def main():
         if not tate:  # 縦方向にはみ出ていたら
             vy *= -1
         screen.blit(bb_img, bb_rct)
+        countup(tmr, screen)
         pg.display.update()
         tmr += 1
         clock.tick(50)
